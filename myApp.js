@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 
 // --> 7)  Mount the Logger middleware here
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
 });
@@ -40,12 +40,13 @@ app.get("/", (req, res) => {
 app.use(express.static(__dirname + "/public")); // aplicando o diretorio public como midleware para toda a aplicação
 app.use('/public', express.static(__dirname + "/public"));//Criando uma requisação valida para quando for invocado o diretorio /public,nesse caso foi solicitado acima como middleware
 
-/** 5) serve JSON on a specific route */
+/** 5) serve JSON on a specific route
 app.get("/json",(req,res)=>{
   res.json(
     {"message":"Hello json"}
   )
 })
+ */
 // app.get("/json", (req, res) => {
 //   res.json(
 //     { "message": "Hello json" }
@@ -54,9 +55,9 @@ app.get("/json",(req,res)=>{
 
 /** 6) Use the .env file to configure the app */
 
-app.get("/json", function(req, res) {
+app.get("/json", function (req, res) {
   var jsonResponse = { "message": "Hello json" };
-
+  console.log(process.env.MESSAGE_STYLE)
   if (process.env.MESSAGE_STYLE === "uppercase") {
     jsonResponse.message = jsonResponse.message.toUpperCase()
   }
@@ -100,7 +101,7 @@ app.get("/name", (req, res) => {
 
 /** 12) Get data form POST  */
 
-app.post("/name", function(req, res) {
+app.post("/name", function (req, res) {
   res.json({ name: req.body.first + " " + req.body.last });
 });
 
